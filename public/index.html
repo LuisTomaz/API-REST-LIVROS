@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Livros</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+
+    <header>
+        <h3 style="color: #ff8989;">Livros</h3>
+        <a href="sobre.html" style="text-decoration: none; color: #fff;"><h3>Sobre</h3></a>
+        <a href="calculo.html" style="text-decoration: none; color: #fff;"><h3>Cálculo</h3></a>
+        <a href="roleta.html" style="text-decoration: none; color: #fff;"><h3>Roleta</h3></a>
+    </header>
+
+    <h1>Catálogo de Livros</h1>
+    <div id="books"></div>
+
+    <script>
+        // obter os livros e exibir
+        async function fetchBooks() {
+            const response = await fetch('/api/books');
+            const books = await response.json();
+
+            const booksContainer = document.getElementById('books');
+            booksContainer.innerHTML = '';
+
+            books.forEach(book => {
+                const bookElement = document.createElement('div');
+                bookElement.innerHTML = `
+                    <h2>${book.titulo}</h2>
+                    <p><strong>Autor:</strong> ${book.autor}</p>
+                    <p><strong>Editora:</strong> ${book.editora}</p>
+                    <p><strong>Número de Páginas:</strong> ${book.numeroDePaginas}</p>
+                    <img src="${book.imagem}" alt="${book.titulo}" style="width: 150px; height: auto;">
+                `;
+                booksContainer.appendChild(bookElement);
+            });
+        }
+
+        // chama a função
+        window.onload = fetchBooks;
+    </script>
+</body>
+
+</html>

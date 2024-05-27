@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="calculo.css">
+    <title>Calculadora de Equação de Segundo Grau</title>
+</head>
+
+<body>
+
+    <header>
+        <a href="index.html" style="text-decoration: none; color: #fff;"><h3>Livros</h3></a>
+        <a href="sobre.html" style="text-decoration: none; color: #fff;"><h3>Sobre</h3></a>
+        <a style="color: #ff8989;"><h3>Cálculo</h3></a>
+        <a href="roleta.html" style="text-decoration: none; color: #fff;"><h3>Roleta</h3></a>
+    </header>
+
+
+    <h1>Calculadora de Equação de Segundo Grau</h1>
+    <form id="equationForm">
+        <label for="coeficiente_a">A:</label>
+        <input type="number" id="coeficiente_a" required><br><br>
+
+        <label for="coeficiente_b">B:</label>
+        <input type="number" id="coeficiente_b" required><br><br>
+
+        <label for="coeficiente_c">C:</label>
+        <input type="number" id="coeficiente_c" required><br><br>
+
+        <button type="button" onclick="calcularRaizes()">Calcular</button>
+    </form>
+
+    <div id="resultado"></div>
+
+    <script>
+        function calcularRaizes() {
+            var a = parseFloat(document.getElementById('coeficiente_a').value);
+            var b = parseFloat(document.getElementById('coeficiente_b').value);
+            var c = parseFloat(document.getElementById('coeficiente_c').value);
+
+            var delta = b ** 2 - 4 * a * c;
+
+            if (delta > 0) {
+                var raiz1 = (-b + Math.sqrt(delta)) / (2 * a);
+                var raiz2 = (-b - Math.sqrt(delta)) / (2 * a);
+                document.getElementById('resultado').innerText = "As raízes são " + raiz1 + " e " + raiz2;
+            } else if (delta === 0) {
+                var raiz = -b / (2 * a);
+                document.getElementById('resultado').innerText = "A raiz dupla é " + raiz;
+            } else {
+                document.getElementById('resultado').innerText = "Não existem raízes reais";
+            }
+        }
+    </script>
+</body>
+
+</html>
